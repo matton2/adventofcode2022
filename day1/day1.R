@@ -58,3 +58,10 @@ answer2 <- inputTibble |>
   top_n(3) |> 
   pull(totalCal) |> 
   sum()
+
+# drob solution
+temp <- inputTibble |> 
+  mutate(group = cumsum(is.na(cal))) |> 
+  count(group, wt = cal) |> 
+  arrange(desc(n)) |> 
+  head(3)
